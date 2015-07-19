@@ -1,13 +1,14 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">#009788</item>
         <item name="colorPrimaryDark">#008d80</item>
         <item name="colorAccent">#FF4081</item>
     </style>
 
-    <style name="AppTheme.Design" parent="AppTheme">
-
+    <style name="AppTheme.Design">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
 </resources>
