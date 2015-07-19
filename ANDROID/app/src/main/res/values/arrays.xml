@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="home_titles">
+        <item>推荐</item>
+        <item>候选</item>
+        <item>动态</item>
+    </string-array>
+</resources>
