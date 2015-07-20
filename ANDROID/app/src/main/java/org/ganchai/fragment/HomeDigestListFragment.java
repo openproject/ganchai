@@ -2,6 +2,8 @@ package org.ganchai.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import com.octo.android.robospice.request.listener.RequestListener;
 
 import org.ganchai.R;
 import org.ganchai.activity.BaseActivity;
+import org.ganchai.adapter.DigestAdapter;
 import org.ganchai.model.Digest;
 import org.ganchai.webservices.json.DigestJson;
 import org.ganchai.webservices.request.DigestListRequest;
@@ -25,8 +28,9 @@ import java.util.List;
 
 public class HomeDigestListFragment extends Fragment {
 
-    private ListView listView;
-    private BaseAdapter adapter;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private DigestAdapter adapter;
 
     public HomeDigestListFragment() {
         // Required empty public constructor
@@ -42,7 +46,9 @@ public class HomeDigestListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home_digest_list, container, false);
-        listView = ViewLess.$(rootView, R.id.listview);
+        recyclerView = ViewLess.$(rootView, R.id.recyclerview);
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
         return rootView;
     }
 
@@ -70,14 +76,7 @@ public class HomeDigestListFragment extends Fragment {
     }
 
     private void initListView(List<Digest> data) {
-        adapter = AdapterLess.$base(getActivity(), data, R.layout.fragment_home_digest_list_item, new AdapterLess.CallBack<Digest>() {
-            @Override
-            public View getView(int i, View view, AdapterLess.ViewHolder viewHolder, Digest digest) {
-                TextView titleView = viewHolder.$view(view, R.id.title);
-                titleView.setText(digest.getTitle());
-                return view;
-            }
-        });
-        listView.setAdapter(adapter);
+        adapter = new DigestAdapter(data);
+        recyclerView.setAdapter(adapter);
     }
 }
