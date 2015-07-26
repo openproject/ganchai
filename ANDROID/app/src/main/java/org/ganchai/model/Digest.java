@@ -6,6 +6,7 @@ public class Digest {
     private String title;
     private String summary;
     private String thumbnail;
+    private String source;
     private String visit;
     private String rating;
 
@@ -39,6 +40,14 @@ public class Digest {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public String getVisit() {

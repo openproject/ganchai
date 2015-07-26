@@ -28,7 +28,6 @@ public class MainActivity extends BaseActivity {
     private ActionBarDrawerToggle drawerToggle;
     private CoordinatorLayout coordinatorLayout;
     private NavigationView navigationView;
-    private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private FragmentPagerAdapter viewPagerAdapter;
@@ -40,13 +39,6 @@ public class MainActivity extends BaseActivity {
 
         initToolbar();
         initView();
-    }
-
-    private void initToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void initView() {
@@ -124,5 +116,10 @@ public class MainActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected boolean isToolbarCanBack() {
+        return false;
     }
 }

@@ -1,7 +1,7 @@
 package org.ganchai.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,13 +16,14 @@ import com.octo.android.robospice.request.listener.RequestListener;
 
 import org.ganchai.R;
 import org.ganchai.activity.BaseActivity;
+import org.ganchai.activity.WebViewActivity;
 import org.ganchai.model.Digest;
 import org.ganchai.webservices.json.DigestJson;
 import org.ganchai.webservices.request.DigestListRequest;
 
 import java.util.List;
 
-public class HomeDigestListFragment extends Fragment {
+public class HomeDigestListFragment extends BaseFragment {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -77,9 +78,18 @@ public class HomeDigestListFragment extends Fragment {
                 R.layout.fragment_home_digest_list_item,
                 new AdapterLess.RecycleCallBack<Digest>() {
                     @Override
-                    public void onBindViewHolder(int i, AdapterLess.RecycleViewHolder recycleViewHolder, Digest digest) {
+                    public void onBindViewHolder(int i, AdapterLess.RecycleViewHolder recycleViewHolder, final Digest digest) {
                         TextView titleView = recycleViewHolder.$view(R.id.title);
                         titleView.setText(digest.getId() + "," + digest.getTitle());
+
+                        recycleViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                                intent.putExtra(WebViewActivity.KEY_URL, digest.getSource());
+                                startActivity(intent);
+                            }
+                        });
                     }
                 });
         recyclerView.setAdapter(adapter);

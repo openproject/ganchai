@@ -17,6 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.WebViewActivity"
+            android:label="activity_webview" />
         <service
             android:name=".webservices.JsonRequestService"
             android:exported="false" />
