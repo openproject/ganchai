@@ -20,10 +20,11 @@ import org.ganchai.activity.WebViewActivity;
 import org.ganchai.model.Digest;
 import org.ganchai.webservices.json.DigestJson;
 import org.ganchai.webservices.request.DigestListRequest;
+import org.ganchai.widget.RecycleItemDecoration;
 
 import java.util.List;
 
-public class HomeDigestListFragment extends BaseFragment {
+public class HomeDigestListFragment extends BaseFragment implements View.OnClickListener {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -78,20 +79,32 @@ public class HomeDigestListFragment extends BaseFragment {
                 R.layout.fragment_home_digest_list_item,
                 new AdapterLess.RecycleCallBack<Digest>() {
                     @Override
-                    public void onBindViewHolder(int i, AdapterLess.RecycleViewHolder recycleViewHolder, final Digest digest) {
+                    public void onBindViewHolder(int i, AdapterLess.RecycleViewHolder recycleViewHolder, Digest digest) {
+                        // set content
                         TextView titleView = recycleViewHolder.$view(R.id.title);
-                        titleView.setText(digest.getId() + "," + digest.getTitle());
+                        TextView summaryView = recycleViewHolder.$view(R.id.summary);
 
-                        recycleViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(getActivity(), WebViewActivity.class);
-                                intent.putExtra(WebViewActivity.KEY_URL, digest.getSource());
-                                startActivity(intent);
-                            }
-                        });
+                        titleView.setText(digest.getTitle());
+                        summaryView.setText(digest.getSummary());
+
+                        titleView.getPaint().setFakeBoldText(true);
+
+                        // set listener
+                        recycleViewHolder.itemView.setTag(digest);
+                        recycleViewHolder.itemView.setOnClickListener(HomeDigestListFragment.this);
                     }
                 });
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new RecycleItemDecoration(getActivity(), RecycleItemDecoration.VERTICAL_LIST, getResources().getDrawable(R.drawable.recycleview_item_decoration)));
+    }
+
+    @Override
+    public void onClick(View v) {
+        Object tag = v.getTag();
+        if (tag != null) {
+            Intent intent = new Intent(getActivity(), WebViewActivity.class);
+            intent.putExtra(WebViewActivity.KEY_URL, ((Digest) tag).getSource());
+            startActivity(intent);
+        }
     }
 }

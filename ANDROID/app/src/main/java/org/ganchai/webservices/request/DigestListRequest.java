@@ -13,6 +13,6 @@ public class DigestListRequest extends RetrofitSpiceRequest<DigestJson, JsonInte
 
     @Override
     public DigestJson loadDataFromNetwork() throws Exception {
-        return getService().getDigestList(1, 50);
+        return getService().getDigestList(1, 16);
     }
 }
