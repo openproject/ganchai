@@ -7,9 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jayfeng.lesscode.core.AdapterLess;
@@ -19,7 +16,6 @@ import com.octo.android.robospice.request.listener.RequestListener;
 
 import org.ganchai.R;
 import org.ganchai.activity.BaseActivity;
-import org.ganchai.adapter.DigestAdapter;
 import org.ganchai.model.Digest;
 import org.ganchai.webservices.json.DigestJson;
 import org.ganchai.webservices.request.DigestListRequest;
@@ -30,7 +26,7 @@ public class HomeDigestListFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private DigestAdapter adapter;
+    private RecyclerView.Adapter<AdapterLess.RecycleViewHolder> adapter;
 
     public HomeDigestListFragment() {
         // Required empty public constructor
@@ -76,7 +72,16 @@ public class HomeDigestListFragment extends Fragment {
     }
 
     private void initListView(List<Digest> data) {
-        adapter = new DigestAdapter(data);
+        adapter = AdapterLess.$recycle(getActivity(),
+                data,
+                R.layout.fragment_home_digest_list_item,
+                new AdapterLess.RecycleCallBack<Digest>() {
+                    @Override
+                    public void onBindViewHolder(int i, AdapterLess.RecycleViewHolder recycleViewHolder, Digest digest) {
+                        TextView titleView = recycleViewHolder.$view(R.id.title);
+                        titleView.setText(digest.getId() + "," + digest.getTitle());
+                    }
+                });
         recyclerView.setAdapter(adapter);
     }
 }
