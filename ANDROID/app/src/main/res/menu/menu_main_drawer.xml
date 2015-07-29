@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2015 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,22 +14,20 @@
   ~ limitations under the License.
   -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="干货">
-        <menu>
-            <item
-                android:id="@+id/nav_home"
-                android:icon="@drawable/ic_home"
-                android:title="首页" />
-            <item
-                android:id="@+id/nav_ref"
-                android:icon="@drawable/ic_view_day"
-                android:title="引用" />
-            <item
-                android:id="@+id/nav_library"
-                android:icon="@drawable/ic_view_day"
-                android:title="库" />
-        </menu>
-    </item>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="首页" />
+        <item
+            android:id="@+id/nav_ref"
+            android:icon="@drawable/ic_view_day"
+            android:title="引用" />
+        <item
+            android:id="@+id/nav_library"
+            android:icon="@drawable/ic_view_day"
+            android:title="库" />
+    </group>
 
     <item android:title="福利">
         <menu>
@@ -42,6 +39,10 @@
                 android:id="@+id/nav_sub_item2"
                 android:icon="@drawable/ic_home"
                 android:title="笑话" />
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/ic_home"
+                android:title="设置" />
         </menu>
     </item>
 

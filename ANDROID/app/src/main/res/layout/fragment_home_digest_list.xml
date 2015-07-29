@@ -6,8 +6,10 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
+        android:paddingTop="8dp"
+        android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fff"/>
+        android:background="#eee"/>
 
 </FrameLayout>
