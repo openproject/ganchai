@@ -9,6 +9,9 @@ public class Digest {
     private String source;
     private String visit;
     private String rating;
+    private String enjoy_url;
+    private String enjoy_text;
+    private String enjoy_image;
 
     public String getId() {
         return id;
@@ -64,5 +67,29 @@ public class Digest {
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public String getEnjoy_url() {
+        return enjoy_url;
+    }
+
+    public void setEnjoy_url(String enjoy_url) {
+        this.enjoy_url = enjoy_url;
+    }
+
+    public String getEnjoy_text() {
+        return enjoy_text;
+    }
+
+    public void setEnjoy_text(String enjoy_text) {
+        this.enjoy_text = enjoy_text;
+    }
+
+    public String getEnjoy_image() {
+        return enjoy_image;
+    }
+
+    public void setEnjoy_image(String enjoy_image) {
+        this.enjoy_image = enjoy_image;
     }
 }

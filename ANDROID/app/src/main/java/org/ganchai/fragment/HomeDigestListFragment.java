@@ -1,17 +1,26 @@
 package org.ganchai.fragment;
 
 import android.content.Intent;
+import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.drawee.controller.ControllerListener;
+import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.image.ImageInfo;
 import com.jayfeng.lesscode.core.AdapterLess;
+import com.jayfeng.lesscode.core.DisplayLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -85,14 +94,29 @@ public class HomeDigestListFragment extends BaseFragment implements View.OnClick
                         // set content
                         TextView titleView = recycleViewHolder.$view(R.id.title);
                         TextView summaryView = recycleViewHolder.$view(R.id.summary);
-                        SimpleDraweeView draweeView = recycleViewHolder.$view(R.id.thumbnail);
+                        SimpleDraweeView thumbnailView = recycleViewHolder.$view(R.id.thumbnail);
+                        SimpleDraweeView enjoyImageView = recycleViewHolder.$view(R.id.enjoy_image);
 
                         titleView.setText(digest.getTitle());
                         summaryView.setText(digest.getSummary());
-                        Uri uri = Uri.parse(digest.getThumbnail());
-                        draweeView.setImageURI(uri);
 
                         titleView.getPaint().setFakeBoldText(true);
+
+                        if (!TextUtils.isEmpty(digest.getThumbnail())) {
+                            Uri uri = Uri.parse(digest.getThumbnail());
+                            thumbnailView.setImageURI(uri);
+                            thumbnailView.setVisibility(View.VISIBLE);
+                        } else {
+                            thumbnailView.setVisibility(View.GONE);
+                        }
+
+                        if (!TextUtils.isEmpty(digest.getEnjoy_image())) {
+                            Uri uri = Uri.parse(digest.getEnjoy_image());
+                            enjoyImageView.setImageURI(uri);
+                            enjoyImageView.setVisibility(View.VISIBLE);
+                        } else {
+                            enjoyImageView.setVisibility(View.GONE);
+                        }
 
                         // set listener
                         recycleViewHolder.itemView.setTag(digest);

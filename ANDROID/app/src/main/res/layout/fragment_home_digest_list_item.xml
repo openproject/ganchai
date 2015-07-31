@@ -23,11 +23,28 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"/>
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/thumbnail"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        fresco:placeholderImage="@mipmap/ic_launcher"
-        />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/thumbnail"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="#3888"
+            />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/enjoy_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="#3888"
+            />
+    </LinearLayout>
 
 </LinearLayout>
