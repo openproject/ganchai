@@ -1,6 +1,7 @@
 package org.ganchai.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jayfeng.lesscode.core.AdapterLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -83,9 +85,12 @@ public class HomeDigestListFragment extends BaseFragment implements View.OnClick
                         // set content
                         TextView titleView = recycleViewHolder.$view(R.id.title);
                         TextView summaryView = recycleViewHolder.$view(R.id.summary);
+                        SimpleDraweeView draweeView = recycleViewHolder.$view(R.id.thumbnail);
 
                         titleView.setText(digest.getTitle());
                         summaryView.setText(digest.getSummary());
+                        Uri uri = Uri.parse(digest.getThumbnail());
+                        draweeView.setImageURI(uri);
 
                         titleView.getPaint().setFakeBoldText(true);
 
