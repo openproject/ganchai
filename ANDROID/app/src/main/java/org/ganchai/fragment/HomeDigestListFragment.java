@@ -27,7 +27,9 @@ import com.octo.android.robospice.request.listener.RequestListener;
 
 import org.ganchai.R;
 import org.ganchai.activity.BaseActivity;
+import org.ganchai.activity.FullImageActivity;
 import org.ganchai.activity.WebViewActivity;
+import org.ganchai.config.Helper;
 import org.ganchai.model.Digest;
 import org.ganchai.webservices.json.DigestJson;
 import org.ganchai.webservices.request.DigestListRequest;
@@ -40,6 +42,16 @@ public class HomeDigestListFragment extends BaseFragment implements View.OnClick
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter<AdapterLess.RecycleViewHolder> adapter;
+
+    private View.OnClickListener imageClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String tag = (String) v.getTag();
+            Intent intent = new Intent(getActivity(), FullImageActivity.class);
+            intent.putExtra("url", tag);
+            startActivity(intent);
+        }
+    };
 
     public HomeDigestListFragment() {
         // Required empty public constructor
@@ -103,17 +115,23 @@ public class HomeDigestListFragment extends BaseFragment implements View.OnClick
                         titleView.getPaint().setFakeBoldText(true);
 
                         if (!TextUtils.isEmpty(digest.getThumbnail())) {
-                            Uri uri = Uri.parse(digest.getThumbnail());
-                            thumbnailView.setImageURI(uri);
+
+                            Helper.displayDraweeView(digest.getThumbnail(), thumbnailView);
+
+                            thumbnailView.setTag(digest.getThumbnail());
                             thumbnailView.setVisibility(View.VISIBLE);
+                            thumbnailView.setOnClickListener(imageClickListener);
                         } else {
                             thumbnailView.setVisibility(View.GONE);
                         }
 
                         if (!TextUtils.isEmpty(digest.getEnjoy_image())) {
-                            Uri uri = Uri.parse(digest.getEnjoy_image());
-                            enjoyImageView.setImageURI(uri);
+
+                            Helper.displayDraweeView(digest.getEnjoy_image(), enjoyImageView);
+
+                            enjoyImageView.setTag(digest.getEnjoy_image());
                             enjoyImageView.setVisibility(View.VISIBLE);
+                            enjoyImageView.setOnClickListener(imageClickListener);
                         } else {
                             enjoyImageView.setVisibility(View.GONE);
                         }

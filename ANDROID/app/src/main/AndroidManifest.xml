@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.ganchai">
+    package="org.ganchai" >
 
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme.Design">
+        android:theme="@style/AppTheme.Design" >
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.Design">
+            android:theme="@style/AppTheme.Design" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.WebViewActivity"
+        <activity
+            android:name=".activity.WebViewActivity"
             android:label="activity_webview" />
+
         <service
             android:name=".webservices.JsonRequestService"
             android:exported="false" />
+
+        <activity
+            android:name=".activity.FullImageActivity"
+            android:label="@string/title_activity_full_image" >
+        </activity>
     </application>
 
 </manifest>
