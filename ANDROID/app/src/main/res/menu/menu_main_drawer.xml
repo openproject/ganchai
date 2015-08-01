@@ -21,27 +21,27 @@
             android:title="首页" />
         <item
             android:id="@+id/nav_ref"
-            android:icon="@drawable/ic_view_day"
+            android:icon="@drawable/ic_reorder_black_18dp"
             android:title="引用" />
         <item
             android:id="@+id/nav_library"
-            android:icon="@drawable/ic_view_day"
+            android:icon="@drawable/ic_polymer_black_18dp"
             android:title="库" />
     </group>
 
-    <item android:title="福利">
+    <item android:title="其它">
         <menu>
             <item
                 android:id="@+id/nav_sub_item1"
-                android:icon="@drawable/ic_home"
+                android:icon="@drawable/ic_perm_media_black_18dp"
                 android:title="美女" />
             <item
                 android:id="@+id/nav_sub_item2"
-                android:icon="@drawable/ic_home"
+                android:icon="@drawable/ic_speaker_notes_black_18dp"
                 android:title="笑话" />
             <item
                 android:id="@+id/nav_setting"
-                android:icon="@drawable/ic_home"
+                android:icon="@drawable/ic_settings_black_18dp"
                 android:title="设置" />
         </menu>
     </item>

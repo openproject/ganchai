@@ -1,7 +1,9 @@
 package org.ganchai.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
@@ -54,7 +56,21 @@ public class MainActivity extends BaseActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+                        final int menuItemId = menuItem.getItemId();
+
                         drawerLayout.closeDrawers();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                if (menuItemId == R.id.nav_setting) {
+                                    Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+                        }, 200);
+
                         return true;
                     }
                 });

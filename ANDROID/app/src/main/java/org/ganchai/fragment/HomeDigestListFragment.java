@@ -29,6 +29,7 @@ import org.ganchai.R;
 import org.ganchai.activity.BaseActivity;
 import org.ganchai.activity.FullImageActivity;
 import org.ganchai.activity.WebViewActivity;
+import org.ganchai.config.Config;
 import org.ganchai.config.Helper;
 import org.ganchai.model.Digest;
 import org.ganchai.webservices.json.DigestJson;
@@ -125,7 +126,7 @@ public class HomeDigestListFragment extends BaseFragment implements View.OnClick
                             thumbnailView.setVisibility(View.GONE);
                         }
 
-                        if (!TextUtils.isEmpty(digest.getEnjoy_image())) {
+                        if (Config.isOpenEnjoyMode() && !TextUtils.isEmpty(digest.getEnjoy_image())) {
 
                             Helper.displayDraweeView(digest.getEnjoy_image(), enjoyImageView);
 

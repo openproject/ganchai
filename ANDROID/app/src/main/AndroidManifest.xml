@@ -30,6 +30,10 @@
             android:name=".activity.FullImageActivity"
             android:label="@string/title_activity_full_image" >
         </activity>
+        <activity
+            android:name=".activity.SettingActivity"
+            android:label="@string/title_activity_setting" >
+        </activity>
     </application>
 
 </manifest>
