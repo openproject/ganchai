@@ -29,7 +29,7 @@ public class FullImageActivity extends AppCompatActivity {
         draweeView = ViewLess.$(this, R.id.image);
         url = getIntent().getStringExtra("url");
 
-        Helper.displayDraweeView(url, draweeView);
+        Helper.displayDraweeView(url, draweeView, true);
     }
 
     @Override
