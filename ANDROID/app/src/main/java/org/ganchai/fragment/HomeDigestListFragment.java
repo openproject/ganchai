@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -109,6 +110,9 @@ public class HomeDigestListFragment extends BaseFragment implements View.OnClick
                         TextView summaryView = recycleViewHolder.$view(R.id.summary);
                         SimpleDraweeView thumbnailView = recycleViewHolder.$view(R.id.thumbnail);
                         SimpleDraweeView enjoyImageView = recycleViewHolder.$view(R.id.enjoy_image);
+                        View enjoyContainerView = recycleViewHolder.$view(R.id.enjoy_container);
+                        TextView enjoyTextView = recycleViewHolder.$view(R.id.enjoy_text);
+                        Button enjoyUrl = recycleViewHolder.$view(R.id.enjoy_url);
 
                         titleView.setText(digest.getTitle());
                         summaryView.setText(digest.getSummary());
@@ -135,6 +139,15 @@ public class HomeDigestListFragment extends BaseFragment implements View.OnClick
                             enjoyImageView.setOnClickListener(imageClickListener);
                         } else {
                             enjoyImageView.setVisibility(View.GONE);
+                        }
+
+                        if (Config.isOpenEnjoyMode()
+                                && !(TextUtils.isEmpty(digest.getEnjoy_text())
+                                    && TextUtils.isEmpty(digest.getEnjoy_url()))) {
+                            enjoyContainerView.setVisibility(View.VISIBLE);
+                            enjoyTextView.setText(digest.getEnjoy_text());
+                        } else {
+                            enjoyContainerView.setVisibility(View.GONE);
                         }
 
                         // set listener

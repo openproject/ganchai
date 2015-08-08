@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/list_item_background"
@@ -11,17 +11,17 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_margin="16dp" />
+        android:layout_margin="16dp"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/summary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"/>
+        android:textSize="14sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,19 +32,39 @@
             android:id="@+id/thumbnail"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_marginLeft="16dp"
             android:layout_marginBottom="16dp"
-            android:background="#3888"
-            />
+            android:layout_marginLeft="16dp"
+            android:background="#3888" />
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/enjoy_image"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_marginLeft="16dp"
             android:layout_marginBottom="16dp"
-            android:background="#3888"
-            />
+            android:layout_marginLeft="16dp"
+            android:background="#3888" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/enjoy_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#eee" />
+
+        <TextView android:id="@+id/enjoy_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button android:id="@+id/enjoy_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="..."/>
     </LinearLayout>
 
 </LinearLayout>
