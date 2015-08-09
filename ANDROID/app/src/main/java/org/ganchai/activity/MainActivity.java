@@ -21,6 +21,7 @@ import com.jayfeng.lesscode.core.AdapterLess;
 import com.jayfeng.lesscode.core.ViewLess;
 
 import org.ganchai.R;
+import org.ganchai.extend.ExtendListFragment;
 import org.ganchai.fragment.HomeDigestListFragment;
 
 
@@ -84,7 +85,17 @@ public class MainActivity extends BaseActivity {
                 new AdapterLess.FullFragmentPagerCallBack() {
                     @Override
                     public Fragment getItem(int i) {
-                        return new HomeDigestListFragment();
+                        Fragment fragment;
+                        if (i == 0) {
+                            fragment = new HomeDigestListFragment();
+                        } else if (i == 1) {
+                            fragment = new ExtendListFragment();
+                        } else if (i == 2) {
+                            fragment = new HomeDigestListFragment();
+                        } else {
+                            fragment = new HomeDigestListFragment();
+                        }
+                        return fragment;
                     }
 
                     @Override
@@ -92,6 +103,7 @@ public class MainActivity extends BaseActivity {
                         return getResources().getStringArray(R.array.home_titles)[i];
                     }
                 });
+        viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }

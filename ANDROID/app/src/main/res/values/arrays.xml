@@ -2,7 +2,7 @@
 <resources>
     <string-array name="home_titles">
         <item>推荐</item>
-        <item>候选</item>
-        <item>动态</item>
+        <item>扩展</item>
+        <item>灌水</item>
     </string-array>
 </resources>

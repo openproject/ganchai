@@ -10,4 +10,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_full_image">大图</string>
     <string name="title_activity_setting">设置</string>
+    <string name="title_activity_base_extend">BaseExtendActivity</string>
+    <string name="title_activity_extend_gank">ExtendGankActivity</string>
+    <string name="title_activity_rss">RssActivity</string>
 </resources>

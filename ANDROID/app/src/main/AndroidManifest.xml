@@ -25,6 +25,9 @@
         <service
             android:name=".webservices.JsonRequestService"
             android:exported="false" />
+        <service
+            android:name=".webservices.JsonRequestService"
+            android:exported="false" />
 
         <activity
             android:name=".activity.FullImageActivity"
@@ -33,6 +36,25 @@
         <activity
             android:name=".activity.SettingActivity"
             android:label="@string/title_activity_setting" >
+        </activity>
+        <activity
+            android:name=".extend.BaseExtendActivity"
+            android:label="@string/title_activity_base_extend" >
+        </activity>
+
+        <!-- EXTEND_BEGIN -->
+        <service
+            android:name=".extend.gank.ExtendGankJsonRequestService"
+            android:exported="false" />
+
+        <activity
+            android:name=".extend.gank.ExtendGankActivity"
+            android:label="@string/title_activity_extend_gank" >
+        </activity>
+        <!-- EXTEND_END -->
+        <activity
+            android:name=".extend.rss.RssActivity"
+            android:label="@string/title_activity_rss" >
         </activity>
     </application>
 
