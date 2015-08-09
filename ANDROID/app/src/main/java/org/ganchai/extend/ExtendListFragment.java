@@ -16,6 +16,7 @@ import com.jayfeng.lesscode.core.ViewLess;
 import org.ganchai.R;
 import org.ganchai.activity.WebViewActivity;
 import org.ganchai.extend.gank.ExtendGankActivity;
+import org.ganchai.extend.rss.ExtendRssActivity;
 import org.ganchai.fragment.BaseFragment;
 import org.ganchai.widget.RecycleItemDecoration;
 
@@ -91,6 +92,30 @@ public class ExtendListFragment extends BaseFragment implements View.OnClickList
         extendModel.setHomepage("http://gank.io/");
         extendModel.setIntentClass(ExtendGankActivity.class);
         extendModels.add(extendModel);
+
+        extendModel = new ExtendModel();
+        extendModel.setTitle("The Android Arsenal");
+        extendModel.setDesc("Android developer portal with tools, libraries, and apps");
+        extendModel.setRss("http://www.android-arsenal.com/rss");
+        extendModel.setHomepage("http://www.android-arsenal.com/");
+        extendModel.setIntentClass(ExtendRssActivity.class);
+        extendModels.add(extendModel);
+
+        extendModel = new ExtendModel();
+        extendModel.setTitle("杰风居");
+        extendModel.setDesc("风无所居，杰行天下");
+        extendModel.setRss("http://www.jayfeng.com/rss.xml");
+        extendModel.setHomepage("http://www.jayfeng.com");
+        extendModel.setIntentClass(ExtendRssActivity.class);
+        extendModels.add(extendModel);
+
+        extendModel = new ExtendModel();
+        extendModel.setTitle("Android开发技术周报");
+        extendModel.setDesc("Android开发技术周报");
+        extendModel.setRss("http://androidweekly.cn/rss/");
+        extendModel.setHomepage("http://www.androidweekly.cn/");
+        extendModel.setIntentClass(ExtendRssActivity.class);
+        extendModels.add(extendModel);
     }
 
     @Override
@@ -103,6 +128,7 @@ public class ExtendListFragment extends BaseFragment implements View.OnClickList
             if (extendModel.getIntentClass() != null) {
                 intent = new Intent(getActivity(), extendModel.getIntentClass());
                 intent.putExtra(BaseExtendActivity.KEY_TITLE, extendModel.getTitle());
+                intent.putExtra(BaseExtendActivity.KEY_RSS, extendModel.getRss());
             } else {
                 intent = new Intent(getActivity(), WebViewActivity.class);
                 intent.putExtra(WebViewActivity.KEY_URL, ((ExtendModel) tag).getHomepage());

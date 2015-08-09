@@ -47,7 +47,7 @@
         </activity>
         <!-- EXTEND_END -->
         <activity
-            android:name=".extend.rss.RssActivity"
+            android:name=".extend.rss.ExtendRssActivity"
             android:label="@string/title_activity_rss" >
         </activity>
     </application>

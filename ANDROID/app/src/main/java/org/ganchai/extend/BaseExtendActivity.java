@@ -12,6 +12,7 @@ import org.ganchai.activity.BaseActivity;
 public class BaseExtendActivity extends BaseActivity {
 
     public static final String KEY_TITLE = "title";
+    public static final String KEY_RSS = "rss";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

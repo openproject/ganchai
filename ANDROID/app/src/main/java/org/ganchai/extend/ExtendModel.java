@@ -4,6 +4,7 @@ public class ExtendModel {
 
     private String title;
     private String desc;
+    private String rss;
     private String homepage;
     private Class<?> intentClass;
 
@@ -21,6 +22,14 @@ public class ExtendModel {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getRss() {
+        return rss;
+    }
+
+    public void setRss(String rss) {
+        this.rss = rss;
     }
 
     public String getHomepage() {
