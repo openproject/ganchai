@@ -50,7 +50,7 @@
         android:visibility="gone"
         android:background="#bdbdbd" />
 
-    <RelativeLayout
+    <RelativeLayout android:id="@+id/about"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="?attr/listChoiceBackgroundIndicator"
@@ -65,7 +65,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:text="关于" />
+            android:text="关于干柴" />
 
     </RelativeLayout>
 

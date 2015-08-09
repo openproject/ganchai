@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">干柴</string>
+    <string name="app_slogan">专注于Android干货资源</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">设置</string>
@@ -12,5 +13,6 @@
     <string name="title_activity_setting">设置</string>
     <string name="title_activity_base_extend">BaseExtendActivity</string>
     <string name="title_activity_extend_gank">ExtendGankActivity</string>
-    <string name="title_activity_rss">RssActivity</string>
+    <string name="title_activity_rss">Rss阅读器</string>
+    <string name="title_activity_about">关于干柴</string>
 </resources>

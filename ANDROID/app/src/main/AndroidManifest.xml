@@ -50,6 +50,10 @@
             android:name=".extend.rss.ExtendRssActivity"
             android:label="@string/title_activity_rss" >
         </activity>
+        <activity
+            android:name=".activity.AboutActivity"
+            android:label="@string/title_activity_about" >
+        </activity>
     </application>
 
 </manifest>
