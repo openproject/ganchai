@@ -1,6 +1,5 @@
 package org.ganchai.extend;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,13 +8,10 @@ import com.octo.android.robospice.SpiceManager;
 
 import org.ganchai.R;
 import org.ganchai.activity.BaseActivity;
-import org.ganchai.extend.gank.ExtendGankJsonRequestService;
 
 public class BaseExtendActivity extends BaseActivity {
 
     public static final String KEY_TITLE = "title";
-
-    protected SpiceManager extendSpiceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,25 +39,5 @@ public class BaseExtendActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    protected void setExtendSpiceManager(SpiceManager spiceManager) {
-        this.extendSpiceManager = spiceManager;
-    }
-
-    @Override
-    protected void onStart() {
-        if (extendSpiceManager != null) {
-            extendSpiceManager.start(this);
-        }
-        super.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        if (extendSpiceManager != null) {
-            extendSpiceManager.shouldStop();
-        }
-        super.onStop();
     }
 }

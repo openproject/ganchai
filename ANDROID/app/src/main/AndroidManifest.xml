@@ -23,10 +23,7 @@
             android:label="activity_webview" />
 
         <service
-            android:name=".webservices.JsonRequestService"
-            android:exported="false" />
-        <service
-            android:name=".webservices.JsonRequestService"
+            android:name=".service.HttpClientSpiceService"
             android:exported="false" />
 
         <activity
@@ -43,9 +40,6 @@
         </activity>
 
         <!-- EXTEND_BEGIN -->
-        <service
-            android:name=".extend.gank.ExtendGankJsonRequestService"
-            android:exported="false" />
 
         <activity
             android:name=".extend.gank.ExtendGankActivity"

@@ -8,10 +8,8 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.jayfeng.lesscode.core.AdapterLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.octo.android.robospice.SpiceManager;
@@ -19,16 +17,9 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
 import org.ganchai.R;
-import org.ganchai.activity.BaseActivity;
 import org.ganchai.activity.WebViewActivity;
-import org.ganchai.config.Config;
-import org.ganchai.config.Helper;
 import org.ganchai.extend.BaseExtendActivity;
-import org.ganchai.extend.ExtendModel;
-import org.ganchai.model.Digest;
-import org.ganchai.webservices.JsonRequestService;
-import org.ganchai.webservices.json.DigestJson;
-import org.ganchai.webservices.request.DigestListRequest;
+import org.ganchai.webservices.request.JsonRequest;
 import org.ganchai.widget.RecycleItemDecoration;
 
 import java.util.List;
@@ -44,8 +35,6 @@ public class ExtendGankActivity extends BaseExtendActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_extend_gank);
 
-        setExtendSpiceManager(new SpiceManager(ExtendGankJsonRequestService.class));
-
         String title = getIntent().getStringExtra(BaseExtendActivity.KEY_TITLE);
         if (!TextUtils.isEmpty(title)) {
             setTitle(title);
@@ -60,8 +49,9 @@ public class ExtendGankActivity extends BaseExtendActivity implements View.OnCli
     }
 
     private void requestData() {
-        ExtendGankListRequest request = new ExtendGankListRequest(1, 20);
-        extendSpiceManager.execute(request, new RequestListener<ExtendGankModelListJson>() {
+        JsonRequest<ExtendGankModelListJson> request = new JsonRequest<>(ExtendGankModelListJson.class);
+        request.setUrl(Config.getGankList(1, 12));
+        getSpiceManager().execute(request, new RequestListener<ExtendGankModelListJson>() {
             @Override
             public void onRequestFailure(SpiceException spiceException) {
                 spiceException.printStackTrace();

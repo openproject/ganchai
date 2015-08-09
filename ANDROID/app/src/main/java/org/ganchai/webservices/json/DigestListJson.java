@@ -4,5 +4,5 @@ import org.ganchai.model.Digest;
 import org.ganchai.webservices.json.wrapper.ListJson;
 import org.ganchai.webservices.json.wrapper.PduJson;
 
-public class DigestJson extends PduJson<ListJson<Digest>>{
+public class DigestListJson extends PduJson<ListJson<Digest>>{
 }

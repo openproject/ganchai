@@ -7,11 +7,12 @@ import android.view.View;
 import com.octo.android.robospice.SpiceManager;
 
 import org.ganchai.R;
-import org.ganchai.webservices.JsonRequestService;
+import org.ganchai.service.HttpClientSpiceService;
 
 public class BaseActivity extends AppCompatActivity {
 
-    private SpiceManager spiceManager = new SpiceManager(JsonRequestService.class);
+    private SpiceManager spiceManager = new SpiceManager(HttpClientSpiceService.class);
+
     protected Toolbar toolbar;
 
     protected void initToolbar() {

@@ -36,7 +36,13 @@ dependencies {
     compile 'com.jayfeng:lesscode-core:0.6.4'
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:design:22.2.0'
-    compile 'com.octo.android.robospice:robospice-retrofit:1.4.14'
+    compile('com.octo.android.robospice:robospice-google-http-client:1.4.14') {
+        exclude(group: 'org.apache.httpcomponents', module: 'httpclient') //by both name and group
+    }
+    compile('com.google.http-client:google-http-client-gson:1.19.0') {
+        exclude module: 'xpp3'
+        exclude group: 'stax'
+    }
     compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'com.facebook.fresco:fresco:0.6.0+'
 }
