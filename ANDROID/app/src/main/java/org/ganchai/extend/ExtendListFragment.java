@@ -83,6 +83,26 @@ public class ExtendListFragment extends BaseFragment implements View.OnClickList
         recyclerView.addItemDecoration(new RecycleItemDecoration(getActivity(), RecycleItemDecoration.VERTICAL_LIST, getResources().getDrawable(R.drawable.recycleview_item_decoration)));
     }
 
+
+    @Override
+    public void onClick(View v) {
+        Object tag = v.getTag();
+        if (tag != null) {
+
+            Intent intent;
+            ExtendModel extendModel = ((ExtendModel) tag);
+            if (extendModel.getIntentClass() != null) {
+                intent = new Intent(getActivity(), extendModel.getIntentClass());
+                intent.putExtra(BaseExtendActivity.KEY_TITLE, extendModel.getTitle());
+                intent.putExtra(BaseExtendActivity.KEY_RSS, extendModel.getRss());
+            } else {
+                intent = new Intent(getActivity(), WebViewActivity.class);
+                intent.putExtra(WebViewActivity.KEY_URL, ((ExtendModel) tag).getHomepage());
+            }
+            startActivity(intent);
+        }
+    }
+
     private void initExtendList() {
         extendModels = new ArrayList<>();
 
@@ -116,24 +136,14 @@ public class ExtendListFragment extends BaseFragment implements View.OnClickList
         extendModel.setHomepage("http://www.androidweekly.cn/");
         extendModel.setIntentClass(ExtendRssActivity.class);
         extendModels.add(extendModel);
+
+        extendModel = new ExtendModel();
+        extendModel.setTitle("好东西论坛");
+        extendModel.setDesc("App开发");
+        extendModel.setRss("http://forum.memect.com/thread-category/app/feed/");
+        extendModel.setHomepage("http://forum.memect.com/");
+        extendModel.setIntentClass(ExtendRssActivity.class);
+        extendModels.add(extendModel);
     }
 
-    @Override
-    public void onClick(View v) {
-        Object tag = v.getTag();
-        if (tag != null) {
-
-            Intent intent;
-            ExtendModel extendModel = ((ExtendModel) tag);
-            if (extendModel.getIntentClass() != null) {
-                intent = new Intent(getActivity(), extendModel.getIntentClass());
-                intent.putExtra(BaseExtendActivity.KEY_TITLE, extendModel.getTitle());
-                intent.putExtra(BaseExtendActivity.KEY_RSS, extendModel.getRss());
-            } else {
-                intent = new Intent(getActivity(), WebViewActivity.class);
-                intent.putExtra(WebViewActivity.KEY_URL, ((ExtendModel) tag).getHomepage());
-            }
-            startActivity(intent);
-        }
-    }
 }

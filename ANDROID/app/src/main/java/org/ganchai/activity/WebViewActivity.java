@@ -36,6 +36,13 @@ public class WebViewActivity extends BaseActivity {
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
             setTitle("正在加载...");
+            webView.getSettings().setBlockNetworkImage(true);
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            webView.getSettings().setBlockNetworkImage(false);
         }
     };
 
