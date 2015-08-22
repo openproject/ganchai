@@ -45,5 +45,6 @@ dependencies {
         exclude group: 'stax'
     }
     compile 'com.android.support:recyclerview-v7:23.0.0'
-    compile 'com.facebook.fresco:fresco:0.6.0+'
+    compile 'com.facebook.fresco:fresco:0.6.0'
+    compile 'in.srain.cube:ultra-ptr:1.0.10'
 }

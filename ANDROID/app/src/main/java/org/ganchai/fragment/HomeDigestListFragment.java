@@ -31,11 +31,28 @@ import org.ganchai.widget.RecycleItemDecoration;
 
 import java.util.List;
 
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+
 public class HomeDigestListFragment extends BaseFragment implements View.OnClickListener {
 
+    public static final int MORE_STATE_NORMAL = 0;
+    public static final int MORE_STATE_LOADING = 1;
+    public static final int MORE_STATE_NONE = 2;
+
+    private PtrClassicFrameLayout ptrFrame;
     private RecyclerView recyclerView;
+    private RecyclerView.ItemDecoration itemDecoration;
+    private View errorView;
+
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter<AdapterLess.RecycleViewHolder> adapter;
+
+    private List<Digest> recyclerData;
+    private int moreState = MORE_STATE_NORMAL;
+    private int page = 1;
+    private static final int size = 20;
 
     private View.OnClickListener imageClickListener = new View.OnClickListener() {
         @Override
@@ -61,9 +78,14 @@ public class HomeDigestListFragment extends BaseFragment implements View.OnClick
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home_digest_list, container, false);
+        ptrFrame = ViewLess.$(rootView, R.id.fragment_rotate_header_with_listview_frame);
         recyclerView = ViewLess.$(rootView, R.id.recyclerview);
+        itemDecoration = new RecycleItemDecoration(getActivity(), RecycleItemDecoration.VERTICAL_LIST, getResources().getDrawable(R.drawable.recycleview_item_decoration));
+
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+
+        errorView = ViewLess.$(rootView, R.id.error);
         return rootView;
     }
 
@@ -71,31 +93,99 @@ public class HomeDigestListFragment extends BaseFragment implements View.OnClick
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        requestData();
+        initPtr();
+
+        ptrFrame.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ptrFrame.autoRefresh();
+            }
+        }, 100);
+    }
+
+    // set pullto refresh view
+    private void initPtr() {
+        ptrFrame.setLastUpdateTimeRelateObject(this);
+        ptrFrame.disableWhenHorizontalMove(true);
+        ptrFrame.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                resetPage();
+                requestData();
+                errorView.setVisibility(View.GONE);
+            }
+
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, recyclerView, header);
+            }
+        });
     }
 
     private void requestData() {
 
         JsonRequest<DigestListJson> request = new JsonRequest<>(DigestListJson.class);
-        request.setUrl(WebConfig.getDigestList(1, 16));
+        request.setUrl(WebConfig.getDigestList(page, size));
 
         ((BaseActivity) getActivity()).getSpiceManager().execute(request, new RequestListener<DigestListJson>() {
             @Override
             public void onRequestFailure(SpiceException spiceException) {
-
+                if (ptrFrame.isRefreshing()) {
+                    ptrFrame.refreshComplete();
+                }
+                ptrFrame.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (adapter == null || adapter.getItemCount() == 0) {
+                            errorView.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }, 400);
             }
 
             @Override
             public void onRequestSuccess(DigestListJson digestListJson) {
-                List<Digest> data = digestListJson.getData().getResult();
-                initListView(data);
+                if (recyclerData != null) {
+                    recyclerData.clear();
+                }
+                if (ptrFrame.isRefreshing()) {
+                    ptrFrame.refreshComplete();
+                }
+                // show data
+                recyclerData = digestListJson.getData().getResult();
+                initListView();
+                errorView.setVisibility(View.GONE);
             }
         });
     }
 
-    private void initListView(List<Digest> data) {
+    private void moreRequestData() {
+        JsonRequest<DigestListJson> request = new JsonRequest<>(DigestListJson.class);
+        request.setUrl(WebConfig.getDigestList(page + 1, size));
+
+        ((BaseActivity) getActivity()).getSpiceManager().execute(request, new RequestListener<DigestListJson>() {
+            @Override
+            public void onRequestFailure(SpiceException spiceException) {
+                moreState = MORE_STATE_NORMAL;
+            }
+
+            @Override
+            public void onRequestSuccess(DigestListJson digestListJson) {
+                page++;
+                List<Digest> moreRecyclerData = digestListJson.getData().getResult();
+                moreListView(moreRecyclerData);
+                if (moreRecyclerData != null && moreRecyclerData.size() < size) {
+                    moreState = MORE_STATE_NONE;
+                } else {
+                    moreState = MORE_STATE_NORMAL;
+                }
+            }
+        });
+    }
+
+    private void initListView() {
         adapter = AdapterLess.$recycle(getActivity(),
-                data,
+                recyclerData,
                 R.layout.fragment_home_digest_list_item,
                 new AdapterLess.RecycleCallBack<Digest>() {
                     @Override
@@ -148,10 +238,29 @@ public class HomeDigestListFragment extends BaseFragment implements View.OnClick
                         // set listener
                         recycleViewHolder.itemView.setTag(digest);
                         recycleViewHolder.itemView.setOnClickListener(HomeDigestListFragment.this);
+
+                        if (i == recyclerData.size() - 1) {
+                            if (moreState == MORE_STATE_NORMAL) {
+                                moreRequestData();
+                                moreState = MORE_STATE_LOADING;
+                            }
+                        }
                     }
                 });
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new RecycleItemDecoration(getActivity(), RecycleItemDecoration.VERTICAL_LIST, getResources().getDrawable(R.drawable.recycleview_item_decoration)));
+
+        recyclerView.removeItemDecoration(itemDecoration);
+        recyclerView.addItemDecoration(itemDecoration);
+    }
+
+    private void moreListView(List<Digest> moreRecycleData) {
+        recyclerData.addAll(moreRecycleData);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void resetPage() {
+        page = 1;
+        moreState = MORE_STATE_NORMAL;
     }
 
     @Override
