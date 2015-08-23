@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jayfeng.lesscode.core.AdapterLess;
+import com.jayfeng.lesscode.core.DisplayLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -52,7 +53,7 @@ public class HomeDigestListFragment extends BaseFragment implements View.OnClick
     private List<Digest> recyclerData;
     private int moreState = MORE_STATE_NORMAL;
     private int page = 1;
-    private static final int size = 20;
+    private static final int size = 10;
 
     private View.OnClickListener imageClickListener = new View.OnClickListener() {
         @Override
@@ -256,6 +257,7 @@ public class HomeDigestListFragment extends BaseFragment implements View.OnClick
     private void moreListView(List<Digest> moreRecycleData) {
         recyclerData.addAll(moreRecycleData);
         adapter.notifyDataSetChanged();
+        recyclerView.smoothScrollBy(0, DisplayLess.$dp2px(40));
     }
 
     private void resetPage() {

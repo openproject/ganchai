@@ -11,24 +11,46 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.jayfeng.lesscode.core.AdapterLess;
+import com.jayfeng.lesscode.core.DisplayLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
 import org.ganchai.R;
+import org.ganchai.activity.BaseActivity;
 import org.ganchai.activity.WebViewActivity;
+import org.ganchai.config.WebConfig;
 import org.ganchai.extend.BaseExtendActivity;
+import org.ganchai.model.Digest;
+import org.ganchai.webservices.json.DigestListJson;
 import org.ganchai.webservices.request.JsonRequest;
 import org.ganchai.widget.RecycleItemDecoration;
 
 import java.util.List;
 
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+
 public class ExtendGankActivity extends BaseExtendActivity implements View.OnClickListener {
 
+    public static final int MORE_STATE_NORMAL = 0;
+    public static final int MORE_STATE_LOADING = 1;
+    public static final int MORE_STATE_NONE = 2;
+
+    private PtrClassicFrameLayout ptrFrame;
     private RecyclerView recyclerView;
+    private View errorView;
+    private RecyclerView.ItemDecoration itemDecoration;
+
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter<AdapterLess.RecycleViewHolder> adapter;
+
+    private List<ExtendGankModel> recyclerData;
+    private int moreState = MORE_STATE_NORMAL;
+    private int page = 1;
+    private static final int size = 12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,35 +61,115 @@ public class ExtendGankActivity extends BaseExtendActivity implements View.OnCli
         if (!TextUtils.isEmpty(title)) {
             setTitle(title);
         }
+
         initToolbar();
+        initView();
+        initPtr();
 
-        recyclerView = ViewLess.$(this, R.id.recyclerview);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        requestData();
+        ptrFrame.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ptrFrame.autoRefresh();
+            }
+        }, 100);
     }
 
-    private void requestData() {
-        JsonRequest<ExtendGankModelListJson> request = new JsonRequest<>(ExtendGankModelListJson.class);
-        request.setUrl(Config.getGankList(1, 12));
-        getSpiceManager().execute(request, new RequestListener<ExtendGankModelListJson>() {
+    private void initView() {
+        ptrFrame = ViewLess.$(this, R.id.fragment_rotate_header_with_listview_frame);
+        recyclerView = ViewLess.$(this, R.id.recyclerview);
+        errorView = ViewLess.$(this, R.id.error);
+
+        itemDecoration = new RecycleItemDecoration(this, RecycleItemDecoration.VERTICAL_LIST, getResources().getDrawable(R.drawable.recycleview_item_decoration));
+        recyclerView.removeItemDecoration(itemDecoration);
+        recyclerView.addItemDecoration(itemDecoration);
+
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+    }
+
+    // set pullto refresh view
+    private void initPtr() {
+        ptrFrame.setLastUpdateTimeRelateObject(this);
+        ptrFrame.disableWhenHorizontalMove(true);
+        ptrFrame.setPtrHandler(new PtrDefaultHandler() {
             @Override
-            public void onRequestFailure(SpiceException spiceException) {
-                spiceException.printStackTrace();
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                resetPage();
+                requestData();
+                errorView.setVisibility(View.GONE);
             }
 
             @Override
-            public void onRequestSuccess(ExtendGankModelListJson extendGankModelListJson) {
-                List<ExtendGankModel> data = extendGankModelListJson.getResults();
-                initListView(data);
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, recyclerView, header);
             }
         });
     }
 
-    private void initListView(List<ExtendGankModel> data) {
+    private void requestData() {
+        JsonRequest<ExtendGankModelListJson> request = new JsonRequest<>(ExtendGankModelListJson.class);
+        request.setUrl(Config.getGankList(page, size));
+        getSpiceManager().execute(request, new RequestListener<ExtendGankModelListJson>() {
+            @Override
+            public void onRequestFailure(SpiceException spiceException) {
+                spiceException.printStackTrace();
+                if (ptrFrame.isRefreshing()) {
+                    ptrFrame.refreshComplete();
+                }
+                ptrFrame.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (adapter == null || adapter.getItemCount() == 0) {
+                            errorView.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }, 400);
+            }
+
+            @Override
+            public void onRequestSuccess(ExtendGankModelListJson extendGankModelListJson) {
+                if (recyclerData != null) {
+                    recyclerData.clear();
+                }
+                if (ptrFrame.isRefreshing()) {
+                    ptrFrame.refreshComplete();
+                }
+                // show data
+                recyclerData = extendGankModelListJson.getResults();
+                initListView();
+                errorView.setVisibility(View.GONE);
+            }
+        });
+    }
+
+
+    private void moreRequestData() {
+        JsonRequest<ExtendGankModelListJson> request = new JsonRequest<>(ExtendGankModelListJson.class);
+        request.setUrl(Config.getGankList(page + 1, size));
+
+        getSpiceManager().execute(request, new RequestListener<ExtendGankModelListJson>() {
+            @Override
+            public void onRequestFailure(SpiceException spiceException) {
+                moreState = MORE_STATE_NORMAL;
+            }
+
+            @Override
+            public void onRequestSuccess(ExtendGankModelListJson extendGankModelListJson) {
+                page++;
+                List<ExtendGankModel> moreRecyclerData = extendGankModelListJson.getResults();
+                moreListView(moreRecyclerData);
+                if (moreRecyclerData != null && moreRecyclerData.size() < size) {
+                    moreState = MORE_STATE_NONE;
+                } else {
+                    moreState = MORE_STATE_NORMAL;
+                }
+            }
+        });
+    }
+
+    private void initListView() {
         adapter = AdapterLess.$recycle(this,
-                data,
+                recyclerData,
                 R.layout.activity_extend_gank_list_item,
                 new AdapterLess.RecycleCallBack<ExtendGankModel>() {
                     @Override
@@ -84,11 +186,27 @@ public class ExtendGankActivity extends BaseExtendActivity implements View.OnCli
                         // set listener
                         recycleViewHolder.itemView.setTag(extendGankModel);
                         recycleViewHolder.itemView.setOnClickListener(ExtendGankActivity.this);
+
+                        if (i == recyclerData.size() - 1) {
+                            if (moreState == MORE_STATE_NORMAL) {
+                                moreRequestData();
+                                moreState = MORE_STATE_LOADING;
+                            }
+                        }
                     }
                 });
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new RecycleItemDecoration(ExtendGankActivity.this, RecycleItemDecoration.VERTICAL_LIST, getResources().getDrawable(R.drawable.recycleview_item_decoration)));
+    }
 
+    private void moreListView(List<ExtendGankModel> moreRecycleData) {
+        recyclerData.addAll(moreRecycleData);
+        adapter.notifyDataSetChanged();
+        recyclerView.smoothScrollBy(0, DisplayLess.$dp2px(40));
+    }
+
+    private void resetPage() {
+        page = 1;
+        moreState = MORE_STATE_NORMAL;
     }
 
     @Override
