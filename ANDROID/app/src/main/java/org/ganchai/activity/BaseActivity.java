@@ -8,12 +8,15 @@ import com.octo.android.robospice.SpiceManager;
 
 import org.ganchai.R;
 import org.ganchai.service.HttpClientSpiceService;
+import org.ganchai.widget.LoadingDialog;
 
 public class BaseActivity extends AppCompatActivity {
 
     private SpiceManager spiceManager = new SpiceManager(HttpClientSpiceService.class);
 
     protected Toolbar toolbar;
+
+    protected LoadingDialog loadingDialog;
 
     protected void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -28,6 +31,35 @@ public class BaseActivity extends AppCompatActivity {
                     onBackPressed();
                 }
             });
+        }
+    }
+
+    protected void initLoadingDialog() {
+        if (loadingDialog == null) {
+            loadingDialog = new LoadingDialog(this);
+            loadingDialog.setCanceledOnTouchOutside(false);
+        }
+    }
+
+    protected void showLoadingDialog() {
+        if (loadingDialog != null && !loadingDialog.isShowing()) {
+            loadingDialog.show();
+        }
+    }
+
+    protected void showLoadingDialog(String loadingText) {
+        if (loadingDialog != null) {
+            loadingDialog.setLoadingText(loadingText);
+        }
+
+        if (loadingDialog != null && !loadingDialog.isShowing() && !isFinishing()) {
+            loadingDialog.show();
+        }
+    }
+
+    protected void cancelLoadingDialog() {
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
         }
     }
 

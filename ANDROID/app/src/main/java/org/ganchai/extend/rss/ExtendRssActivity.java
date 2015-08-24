@@ -42,6 +42,7 @@ public class ExtendRssActivity extends BaseExtendActivity implements View.OnClic
             setTitle(title);
         }
         initToolbar();
+        initLoadingDialog();
 
         recyclerView = ViewLess.$(this, R.id.recyclerview);
         layoutManager = new LinearLayoutManager(this);
@@ -51,17 +52,20 @@ public class ExtendRssActivity extends BaseExtendActivity implements View.OnClic
     }
 
     private void requestData() {
+        showLoadingDialog("正在加载");
         ExtendRssRequest request = new ExtendRssRequest();
         request.setUrl(rssUrl);
         getSpiceManager().execute(request, new RequestListener<ExtendRssModelList>() {
             @Override
             public void onRequestFailure(SpiceException spiceException) {
                 spiceException.printStackTrace();
+                cancelLoadingDialog();
             }
 
             @Override
             public void onRequestSuccess(ExtendRssModelList extendRssModelList) {
                 initListView(extendRssModelList);
+                cancelLoadingDialog();
             }
         });
     }
