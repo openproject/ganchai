@@ -144,6 +144,20 @@ public class ExtendListFragment extends BaseFragment implements View.OnClickList
         extendModel.setHomepage("http://forum.memect.com/");
         extendModel.setIntentClass(ExtendRssActivity.class);
         extendModels.add(extendModel);
+
+        extendModel = new ExtendModel();
+        extendModel.setTitle("trinea");
+        extendModel.setDesc("微信codek2, Focus on Android, Java, Open Source, Performance Optimization");
+        extendModel.setRss("http://www.trinea.cn/feed/");
+        extendModel.setHomepage("http://www.trinea.cn/");
+        extendModel.setIntentClass(ExtendRssActivity.class);
+        extendModels.add(extendModel);
+
+        extendModel = new ExtendModel();
+        extendModel.setTitle("codeKK");
+        extendModel.setDesc("开源项目源码分析");
+        extendModel.setHomepage("http://codekk.com/");
+        extendModels.add(extendModel);
     }
 
 }
