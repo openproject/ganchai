@@ -14,6 +14,7 @@
     <string name="title_activity_base_extend">BaseExtendActivity</string>
     <string name="title_activity_extend_gank">ExtendGankActivity</string>
     <string name="title_activity_rss">Rss阅读器</string>
+    <string name="title_activity_atom">Atom阅读器</string>
     <string name="title_activity_about">关于干柴</string>
 
     <string name="menu_action_open_browser">在浏览器中打开</string>

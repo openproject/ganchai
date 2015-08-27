@@ -17,6 +17,7 @@ import org.ganchai.R;
 import org.ganchai.activity.WebViewActivity;
 import org.ganchai.extend.gank.ExtendGankActivity;
 import org.ganchai.extend.rss.ExtendRssActivity;
+import org.ganchai.extend.atom.ExtendAtomActivity;
 import org.ganchai.fragment.BaseFragment;
 import org.ganchai.widget.RecycleItemDecoration;
 
@@ -146,6 +147,14 @@ public class ExtendListFragment extends BaseFragment implements View.OnClickList
         extendModels.add(extendModel);
 
         extendModel = new ExtendModel();
+        extendModel.setTitle("Android开发_博客园");
+        extendModel.setDesc("代码改变世界");
+        extendModel.setRss("http://feed.cnblogs.com/blog/sitecateogry/android/rss");
+        extendModel.setHomepage("http://www.cnblogs.com/cate/android/");
+        extendModel.setIntentClass(ExtendAtomActivity.class);
+        extendModels.add(extendModel);
+
+        extendModel = new ExtendModel();
         extendModel.setTitle("trinea");
         extendModel.setDesc("微信codek2, Focus on Android, Java, Open Source, Performance Optimization");
         extendModel.setRss("http://www.trinea.cn/feed/");
@@ -158,6 +167,13 @@ public class ExtendListFragment extends BaseFragment implements View.OnClickList
         extendModel.setDesc("开源项目源码分析");
         extendModel.setHomepage("http://codekk.com/");
         extendModels.add(extendModel);
+
+        extendModel = new ExtendModel();
+        extendModel.setTitle("Material Design 官网（翻墙）");
+        extendModel.setDesc("Create a visual language that synthesizes classic principles of good design with the innovation and possibility of technology and science.");
+        extendModel.setHomepage("http://www.google.com/design/spec/material-design/");
+        extendModels.add(extendModel);
+
     }
 
 }
