@@ -27,6 +27,10 @@
             android:id="@+id/nav_library"
             android:icon="@drawable/ic_polymer_black_18dp"
             android:title="库" />
+        <item
+            android:id="@+id/nav_must"
+            android:icon="@drawable/ic_get_app_black_18dp"
+            android:title="必备" />
     </group>
 
     <item android:title="其它">

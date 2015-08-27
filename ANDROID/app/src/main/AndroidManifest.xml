@@ -58,6 +58,10 @@
             android:name=".activity.AboutActivity"
             android:label="@string/title_activity_about" >
         </activity>
+        <activity
+            android:name=".activity.MustActivity"
+            android:label="@string/title_activity_must" >
+        </activity>
     </application>
 
 </manifest>

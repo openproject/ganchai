@@ -74,6 +74,9 @@ public class MainActivity extends BaseActivity {
                                 if (menuItemId == R.id.nav_setting) {
                                     Intent intent = new Intent(MainActivity.this, SettingActivity.class);
                                     startActivity(intent);
+                                } else if (menuItemId == R.id.nav_must) {
+                                    Intent intent = new Intent(MainActivity.this, MustActivity.class);
+                                    startActivity(intent);
                                 }
                             }
                         }, 200);
