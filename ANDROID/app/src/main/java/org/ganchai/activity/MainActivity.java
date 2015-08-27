@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -16,8 +17,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.jayfeng.lesscode.core.AdapterLess;
+import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;
 
 import org.ganchai.R;
@@ -33,6 +36,8 @@ public class MainActivity extends BaseActivity {
     private NavigationView navigationView;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private FloatingActionButton floatingActionButton;
+
     private FragmentPagerAdapter viewPagerAdapter;
 
     @Override
@@ -51,6 +56,7 @@ public class MainActivity extends BaseActivity {
         coordinatorLayout = ViewLess.$(this, R.id.content);
         tabLayout = ViewLess.$(this, R.id.tabs);
         viewPager = ViewLess.$(this, R.id.viewpager);
+        floatingActionButton = ViewLess.$(this, R.id.fab);
 
         drawerLayout.setDrawerListener(drawerToggle);
         navigationView.setNavigationItemSelectedListener(
@@ -77,6 +83,13 @@ public class MainActivity extends BaseActivity {
                 });
 
         initViewPager();
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastLess.$(MainActivity.this, "敬请期待");
+            }
+        });
     }
 
     private void initViewPager() {
