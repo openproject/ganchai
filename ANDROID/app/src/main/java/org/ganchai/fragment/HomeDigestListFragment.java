@@ -38,6 +38,8 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 
 public class HomeDigestListFragment extends BaseFragment implements View.OnClickListener {
 
+    public static final String KEY_DIGEST_TYPE = "key_digest_type";
+
     public static final int MORE_STATE_NORMAL = 0;
     public static final int MORE_STATE_LOADING = 1;
     public static final int MORE_STATE_NONE = 2;
@@ -52,6 +54,7 @@ public class HomeDigestListFragment extends BaseFragment implements View.OnClick
 
     private List<Digest> recyclerData;
     private int moreState = MORE_STATE_NORMAL;
+    private int type = 0;
     private int page = 1;
     private static final int size = 10;
 
@@ -72,6 +75,8 @@ public class HomeDigestListFragment extends BaseFragment implements View.OnClick
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        type = getArguments().getInt(KEY_DIGEST_TYPE, 0);
     }
 
     @Override
@@ -126,7 +131,7 @@ public class HomeDigestListFragment extends BaseFragment implements View.OnClick
     private void requestData() {
 
         JsonRequest<DigestListJson> request = new JsonRequest<>(DigestListJson.class);
-        request.setUrl(WebConfig.getDigestList(page, size));
+        request.setUrl(WebConfig.getDigestList(page, size, type));
 
         ((BaseActivity) getActivity()).getSpiceManager().execute(request, new RequestListener<DigestListJson>() {
             @Override
@@ -162,7 +167,7 @@ public class HomeDigestListFragment extends BaseFragment implements View.OnClick
 
     private void moreRequestData() {
         JsonRequest<DigestListJson> request = new JsonRequest<>(DigestListJson.class);
-        request.setUrl(WebConfig.getDigestList(page + 1, size));
+        request.setUrl(WebConfig.getDigestList(page + 1, size, type));
 
         ((BaseActivity) getActivity()).getSpiceManager().execute(request, new RequestListener<DigestListJson>() {
             @Override

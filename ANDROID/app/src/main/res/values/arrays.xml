@@ -3,6 +3,6 @@
     <string-array name="home_titles">
         <item>推荐</item>
         <item>聚合</item>
-        <item>灌水</item>
+        <item>ANY</item>
     </string-array>
 </resources>

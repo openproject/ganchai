@@ -14,7 +14,7 @@ public class WebConfig {
      * *********************************************************************************************
      */
 
-    public static String getDigestList(int page, int size) {
-        return SERVER_API + "/digest?p=" + page + "&size=" + size;
+    public static String getDigestList(int page, int size, int type) {
+        return SERVER_API + "/digest?t=" + type + "&p=" + page + "&size=" + size;
     }
 }

@@ -103,11 +103,17 @@ public class MainActivity extends BaseActivity {
                     public Fragment getItem(int i) {
                         Fragment fragment;
                         if (i == 0) {
+                            Bundle bundle = new Bundle();
+                            bundle.putInt(HomeDigestListFragment.KEY_DIGEST_TYPE, 0);
                             fragment = new HomeDigestListFragment();
+                            fragment.setArguments(bundle);
                         } else if (i == 1) {
                             fragment = new ExtendListFragment();
                         } else if (i == 2) {
+                            Bundle bundle = new Bundle();
+                            bundle.putInt(HomeDigestListFragment.KEY_DIGEST_TYPE, 4);
                             fragment = new HomeDigestListFragment();
+                            fragment.setArguments(bundle);
                         } else {
                             fragment = new HomeDigestListFragment();
                         }
