@@ -5,4 +5,8 @@
         <item>聚合</item>
         <item>ANY</item>
     </string-array>
+    <string-array name="must_titles">
+        <item>软件</item>
+        <item>Android基础</item>
+    </string-array>
 </resources>

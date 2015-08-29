@@ -1,39 +1,68 @@
 package org.ganchai.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import org.ganchai.R;
+import com.jayfeng.lesscode.core.AdapterLess;
+import com.jayfeng.lesscode.core.ViewLess;
 
-public class MustActivity extends AppCompatActivity {
+import org.ganchai.R;
+import org.ganchai.extend.ExtendListFragment;
+import org.ganchai.fragment.HomeDigestListFragment;
+import org.ganchai.fragment.MustListFragment;
+
+public class MustActivity extends BaseActivity {
+
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+
+    private FragmentPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_must);
+
+        initToolbar();
+        initView();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_must, menu);
-        return true;
+    private void initView() {
+        tabLayout = ViewLess.$(this, R.id.tabs);
+        viewPager = ViewLess.$(this, R.id.viewpager);
+
+        initViewPager();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    private void initViewPager() {
+        viewPagerAdapter = AdapterLess.$pager(getSupportFragmentManager(),
+                getResources().getStringArray(R.array.must_titles).length,
+                new AdapterLess.FullFragmentPagerCallBack() {
+                    @Override
+                    public Fragment getItem(int i) {
+                        Fragment fragment;
+                        if (i == 0) {
+                            fragment = new MustListFragment();
+                        } else if (i == 1) {
+                            fragment = new MustListFragment();
+                        } else {
+                            fragment = new HomeDigestListFragment();
+                        }
+                        return fragment;
+                    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+                    @Override
+                    public String getPageTitle(int i) {
+                        return getResources().getStringArray(R.array.must_titles)[i];
+                    }
+                });
+        viewPager.setOffscreenPageLimit(3);
+        viewPager.setAdapter(viewPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 }
