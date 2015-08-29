@@ -11,13 +11,16 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
 
 import com.jayfeng.lesscode.core.AdapterLess;
 import com.jayfeng.lesscode.core.ToastLess;
@@ -91,7 +94,8 @@ public class MainActivity extends BaseActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastLess.$(MainActivity.this, "敬请期待");
+                Intent intent = new Intent(MainActivity.this, PostActivity.class);
+                startActivity(intent);
             }
         });
     }

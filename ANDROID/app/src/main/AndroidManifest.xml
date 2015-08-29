@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.ganchai" >
+    package="org.ganchai">
 
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme.Design" >
+        android:theme="@style/AppTheme.Design">
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.Design" >
+            android:theme="@style/AppTheme.Design">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,40 +28,34 @@
 
         <activity
             android:name=".activity.FullImageActivity"
-            android:label="@string/title_activity_full_image" >
-        </activity>
+            android:label="@string/title_activity_full_image" />
         <activity
             android:name=".activity.SettingActivity"
-            android:label="@string/title_activity_setting" >
-        </activity>
+            android:label="@string/title_activity_setting" />
         <activity
             android:name=".extend.BaseExtendActivity"
-            android:label="@string/title_activity_base_extend" >
-        </activity>
-
+            android:label="@string/title_activity_base_extend" />
+        <activity
+            android:name=".activity.AboutActivity"
+            android:label="@string/title_activity_about" />
+        <activity
+            android:name=".activity.MustActivity"
+            android:label="@string/title_activity_must" />
+        <activity
+            android:name=".activity.PostActivity"
+            android:label="@string/title_activity_post" />
         <!-- EXTEND_BEGIN -->
 
         <activity
             android:name=".extend.gank.ExtendGankActivity"
-            android:label="@string/title_activity_extend_gank" >
-        </activity>
-        <!-- EXTEND_END -->
+            android:label="@string/title_activity_extend_gank" />
         <activity
             android:name=".extend.rss.ExtendRssActivity"
-            android:label="@string/title_activity_rss" >
-        </activity>
+            android:label="@string/title_activity_rss" />
         <activity
             android:name=".extend.atom.ExtendAtomActivity"
-            android:label="@string/title_activity_atom" >
-        </activity>
-        <activity
-            android:name=".activity.AboutActivity"
-            android:label="@string/title_activity_about" >
-        </activity>
-        <activity
-            android:name=".activity.MustActivity"
-            android:label="@string/title_activity_must" >
-        </activity>
+            android:label="@string/title_activity_atom" />
+        <!-- EXTEND_END -->
     </application>
 
 </manifest>
