@@ -8,6 +8,11 @@ public class WebConfig {
 
     public static final String SERVER_API = "http://ganchai.sinaapp.com/api";
 
+    public static final int DIGEST_TYPE_ANDROID = 1;
+    public static final int DIGEST_TYPE_IOS = 2;
+    public static final int DIGEST_TYPE_HTML5 = 3;
+    public static final int DIGEST_TYPE_ANY = 4;
+
     /**
      * *********************************************************************************************
      * server api list

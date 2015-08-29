@@ -24,6 +24,7 @@ import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;
 
 import org.ganchai.R;
+import org.ganchai.config.WebConfig;
 import org.ganchai.extend.ExtendListFragment;
 import org.ganchai.fragment.HomeDigestListFragment;
 
@@ -104,14 +105,14 @@ public class MainActivity extends BaseActivity {
                         Fragment fragment;
                         if (i == 0) {
                             Bundle bundle = new Bundle();
-                            bundle.putInt(HomeDigestListFragment.KEY_DIGEST_TYPE, 0);
+                            bundle.putInt(HomeDigestListFragment.KEY_DIGEST_TYPE, WebConfig.DIGEST_TYPE_ANDROID);
                             fragment = new HomeDigestListFragment();
                             fragment.setArguments(bundle);
                         } else if (i == 1) {
                             fragment = new ExtendListFragment();
                         } else if (i == 2) {
                             Bundle bundle = new Bundle();
-                            bundle.putInt(HomeDigestListFragment.KEY_DIGEST_TYPE, 4);
+                            bundle.putInt(HomeDigestListFragment.KEY_DIGEST_TYPE, WebConfig.DIGEST_TYPE_ANY);
                             fragment = new HomeDigestListFragment();
                             fragment.setArguments(bundle);
                         } else {
