@@ -29,6 +29,21 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    // rename the apk with the version name
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File(
+                    output.outputFile.parent + "/${variant.buildType.name}",
+                    "ganchai-${variant.productFlavors[0].name}-${variant.buildType.name}-${variant.versionName}.apk".toLowerCase())
+        }
+    }
+
+    productFlavors {
+        dev {
+            manifestPlaceholders = [channel: "dev"]
+        }
+    }
 }
 
 dependencies {
@@ -47,4 +62,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.0.0'
     compile 'com.facebook.fresco:fresco:0.6.0'
     compile 'in.srain.cube:ultra-ptr:1.0.10'
+    compile 'com.umeng.analytics:analytics:latest.integration'
 }

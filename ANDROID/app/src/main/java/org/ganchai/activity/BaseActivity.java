@@ -5,6 +5,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.octo.android.robospice.SpiceManager;
+import com.umeng.analytics.MobclickAgent;
 
 import org.ganchai.R;
 import org.ganchai.service.HttpClientSpiceService;
@@ -61,6 +62,18 @@ public class BaseActivity extends AppCompatActivity {
         if (loadingDialog != null && loadingDialog.isShowing()) {
             loadingDialog.dismiss();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     @Override
