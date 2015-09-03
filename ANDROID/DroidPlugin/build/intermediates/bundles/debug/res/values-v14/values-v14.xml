@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/fengjian/Code/github/ganchai/ANDROID/DroidPlugin/res/values-v14/styles.xml -->
+    <eat-comment/>
+    <style name="DroidPluginTheme" parent="android:Theme.DeviceDefault.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/plugin_activity_loading</item>
+    </style>
+    <style name="DroidPluginThemeDialog" parent="android:Theme.DeviceDefault.Light.Dialog">
+        <item name="android:windowBackground">@drawable/plugin_activity_loading</item>
+    </style>
+</resources>

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/fengjian/Code/github/ganchai/ANDROID/DroidPlugin/assets"/></dataSet><dataSet config="release"><source path="/Users/fengjian/Code/github/ganchai/ANDROID/DroidPlugin/build-types/release/assets"/></dataSet></merger>

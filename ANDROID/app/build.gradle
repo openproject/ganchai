@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.0"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "org.ganchai"
@@ -64,4 +64,5 @@ dependencies {
     compile 'in.srain.cube:ultra-ptr:1.0.10'
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'org.jsoup:jsoup:1.8.3'
+    compile project(':DroidPlugin')
 }
