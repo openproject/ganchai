@@ -203,6 +203,35 @@ public class ExtendListFragment extends BaseFragment implements View.OnClickList
         extendModels.add(extendModel);
 
         extendModel = new ExtendModel();
+        extendModel.setTitle("AndroidLibs");
+        extendModel.setDesc("Your portal for android libraries and tools");
+        extendModel.setHtml("https://android-libs.com/");
+        extendModel.setHomepage("https://android-libs.com/");
+        extendModel.setIntentClass(ExtendHtmlActivity.class);
+        extendModel.setListSelectPath(".lib-rows .box-inner");
+        extendModel.setTitleSelectPath(".box-lib-title a");
+        extendModel.setSummarySelectPath(".box-lib-desc");
+        extendModel.setTimeSelectPath(".lib-date");
+        extendModel.setUrlSelectPath(".box-lib-title a");
+        extendModel.setUrlSelectAttr("href");
+        extendModels.add(extendModel);
+
+        extendModel = new ExtendModel();
+        extendModel.setTitle("Stack Overflow");
+        extendModel.setDesc("Newest 'android' Questions");
+        extendModel.setHtml("http://stackoverflow.com/questions/tagged/android");
+        extendModel.setHomepage("http://stackoverflow.com/questions/tagged/android");
+        extendModel.setIntentClass(ExtendHtmlActivity.class);
+        extendModel.setListSelectPath(".question-summary");
+        extendModel.setTitleSelectPath(".question-hyperlink");
+        extendModel.setSummarySelectPath(".tag-excerpt");
+        extendModel.setTimeSelectPath(".relativetime");
+        extendModel.setUrlSelectPath(".question-hyperlink");
+        extendModel.setUrlSelectAttr("href");
+        extendModel.setUrlSelectPrefix("http://stackoverflow.com/");
+        extendModels.add(extendModel);
+
+        extendModel = new ExtendModel();
         extendModel.setTitle("Android开发_博客园");
         extendModel.setDesc("代码改变世界");
         extendModel.setRss("http://feed.cnblogs.com/blog/sitecateogry/android/rss");

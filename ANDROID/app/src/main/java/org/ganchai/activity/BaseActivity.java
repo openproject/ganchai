@@ -1,7 +1,9 @@
 package org.ganchai.activity;
 
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.octo.android.robospice.SpiceManager;
@@ -39,6 +41,16 @@ public class BaseActivity extends AppCompatActivity {
         if (loadingDialog == null) {
             loadingDialog = new LoadingDialog(this);
             loadingDialog.setCanceledOnTouchOutside(false);
+            loadingDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+                @Override
+                public boolean onKey(DialogInterface dialogInterface, int keyCode, KeyEvent keyEvent) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
+                        onBackPressed();
+                        return true;
+                    }
+                    return false;
+                }
+            });
         }
     }
 
