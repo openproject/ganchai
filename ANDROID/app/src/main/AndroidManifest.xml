@@ -57,6 +57,8 @@
             android:name=".activity.PostActivity"
             android:label="@string/title_activity_post" />
 
+        <activity android:name="xyz.ganchai.activity.MainActivity" />
+
         <!-- EXTEND_BEGIN -->
         <activity
             android:name=".extend.gank.ExtendGankActivity"
@@ -69,6 +71,9 @@
             android:label="@string/title_activity_atom" />
         <activity
             android:name=".extend.html.ExtendHtmlActivity"
+            android:label="@string/title_activity_html" />
+        <activity
+            android:name=".extend.weixin.ExtendWeixinActivity"
             android:label="@string/title_activity_html" />
         <!-- EXTEND_END -->
     </application>
