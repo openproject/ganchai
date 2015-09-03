@@ -15,6 +15,7 @@ import com.jayfeng.lesscode.core.ViewLess;
 
 import org.ganchai.R;
 import org.ganchai.activity.WebViewActivity;
+import org.ganchai.extend.html.ExtendHtmlActivity;
 import org.ganchai.extend.gank.ExtendGankActivity;
 import org.ganchai.extend.rss.ExtendRssActivity;
 import org.ganchai.extend.atom.ExtendAtomActivity;
@@ -95,7 +96,19 @@ public class ExtendListFragment extends BaseFragment implements View.OnClickList
             if (extendModel.getIntentClass() != null) {
                 intent = new Intent(getActivity(), extendModel.getIntentClass());
                 intent.putExtra(BaseExtendActivity.KEY_TITLE, extendModel.getTitle());
-                intent.putExtra(BaseExtendActivity.KEY_RSS, extendModel.getRss());
+                intent.putExtra(BaseExtendActivity.KEY_HTML, extendModel.getHtml());
+
+                // for html parse
+                intent.putExtra(ExtendHtmlActivity.KEY_SELECT_PATH_LIST, extendModel.getListSelectPath());
+                intent.putExtra(ExtendHtmlActivity.KEY_SELECT_PATH_TITLE, extendModel.getTitleSelectPath());
+                intent.putExtra(ExtendHtmlActivity.KEY_SELECT_PATH_SUMMARY, extendModel.getSummarySelectPath());
+                intent.putExtra(ExtendHtmlActivity.KEY_SELECT_PATH_TIME, extendModel.getTimeSelectPath());
+                intent.putExtra(ExtendHtmlActivity.KEY_SELECT_PATH_URL, extendModel.getUrlSelectPath());
+                intent.putExtra(ExtendHtmlActivity.KEY_SELECT_ATTR_TITLE, extendModel.getTitleSelectAttr());
+                intent.putExtra(ExtendHtmlActivity.KEY_SELECT_ATTR_SUMMARY, extendModel.getSummarySelectAttr());
+                intent.putExtra(ExtendHtmlActivity.KEY_SELECT_ATTR_TIME, extendModel.getTimeSelectAttr());
+                intent.putExtra(ExtendHtmlActivity.KEY_SELECT_ATTR_URL, extendModel.getUrlSelectAttr());
+                intent.putExtra(ExtendHtmlActivity.KEY_SELECT_PREFIX_URL, extendModel.getUrlSelectPrefix());
             } else {
                 intent = new Intent(getActivity(), WebViewActivity.class);
                 intent.putExtra(WebViewActivity.KEY_URL, ((ExtendModel) tag).getHomepage());
@@ -144,6 +157,49 @@ public class ExtendListFragment extends BaseFragment implements View.OnClickList
         extendModel.setRss("http://forum.memect.com/thread-category/app/feed/");
         extendModel.setHomepage("http://forum.memect.com/");
         extendModel.setIntentClass(ExtendRssActivity.class);
+        extendModels.add(extendModel);
+
+        extendModel = new ExtendModel();
+        extendModel.setTitle("CSDN.NET");
+        extendModel.setDesc("移动开发热门推荐文章 - 博客频道");
+        extendModel.setHtml("http://blog.csdn.net/mobile/index.html");
+        extendModel.setHomepage("http://blog.csdn.net/mobile/index.html");
+        extendModel.setIntentClass(ExtendHtmlActivity.class);
+        extendModel.setListSelectPath(".blog_list");
+        extendModel.setTitleSelectPath("h1 a");
+        extendModel.setSummarySelectPath("dl dd");
+        extendModel.setTimeSelectPath(".time");
+        extendModel.setUrlSelectPath("h1 a");
+        extendModel.setUrlSelectAttr("href");
+        extendModels.add(extendModel);
+
+        extendModel = new ExtendModel();
+        extendModel.setTitle("ITeye");
+        extendModel.setDesc("Android,安卓 移动开发近期最受欢迎的博客，ITeye博客频道");
+        extendModel.setHtml("http://www.iteye.com/blogs/tag/Android");
+        extendModel.setHomepage("http://www.iteye.com/blogs/tag/Android");
+        extendModel.setIntentClass(ExtendHtmlActivity.class);
+        extendModel.setListSelectPath(".blog .content");
+        extendModel.setTitleSelectPath("h3 a");
+        extendModel.setSummarySelectPath("div");
+        extendModel.setTimeSelectPath(".date");
+        extendModel.setUrlSelectPath("h3 a");
+        extendModel.setUrlSelectAttr("href");
+        extendModels.add(extendModel);
+
+        extendModel = new ExtendModel();
+        extendModel.setTitle("Android Performance");
+        extendModel.setDesc("专注于 Android 性能优化");
+        extendModel.setHtml("http://androidperformance.com/");
+        extendModel.setHomepage("http://androidperformance.com/");
+        extendModel.setIntentClass(ExtendHtmlActivity.class);
+        extendModel.setListSelectPath(".post");
+        extendModel.setTitleSelectPath(".post-title a");
+        extendModel.setSummarySelectPath(".post-excerpt");
+        extendModel.setTimeSelectPath(".post-meta time");
+        extendModel.setUrlSelectPath(".post-title a");
+        extendModel.setUrlSelectAttr("href");
+        extendModel.setUrlSelectPrefix("http://androidperformance.com/");
         extendModels.add(extendModel);
 
         extendModel = new ExtendModel();

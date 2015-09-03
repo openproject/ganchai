@@ -56,8 +56,8 @@
         <activity
             android:name=".activity.PostActivity"
             android:label="@string/title_activity_post" />
-        <!-- EXTEND_BEGIN -->
 
+        <!-- EXTEND_BEGIN -->
         <activity
             android:name=".extend.gank.ExtendGankActivity"
             android:label="@string/title_activity_extend_gank" />
@@ -67,6 +67,9 @@
         <activity
             android:name=".extend.atom.ExtendAtomActivity"
             android:label="@string/title_activity_atom" />
+        <activity
+            android:name=".extend.html.ExtendHtmlActivity"
+            android:label="@string/title_activity_html" />
         <!-- EXTEND_END -->
     </application>
 

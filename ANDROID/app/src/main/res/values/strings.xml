@@ -6,10 +6,11 @@
     <string name="title_activity_must">必备</string>
     <string name="title_activity_post">推荐干货</string>
     <string name="title_activity_setting">设置</string>
-    <string name="title_activity_base_extend">BaseExtendActivity</string>
-    <string name="title_activity_extend_gank">ExtendGankActivity</string>
+    <string name="title_activity_base_extend">扩展模块</string>
+    <string name="title_activity_extend_gank">干货集中营</string>
     <string name="title_activity_rss">Rss阅读器</string>
     <string name="title_activity_atom">Atom阅读器</string>
+    <string name="title_activity_html">Html阅读器</string>
     <string name="title_activity_about">关于干柴</string>
 
     <string name="hello_world">Hello world!</string>

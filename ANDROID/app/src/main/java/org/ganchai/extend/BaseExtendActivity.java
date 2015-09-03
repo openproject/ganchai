@@ -13,6 +13,7 @@ public class BaseExtendActivity extends BaseActivity {
 
     public static final String KEY_TITLE = "title";
     public static final String KEY_RSS = "rss";
+    public static final String KEY_HTML = "html";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

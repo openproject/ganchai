@@ -63,4 +63,5 @@ dependencies {
     compile 'com.facebook.fresco:fresco:0.6.0'
     compile 'in.srain.cube:ultra-ptr:1.0.10'
     compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'org.jsoup:jsoup:1.8.3'
 }
