@@ -40,8 +40,8 @@ public class ExtendHtmlRequest extends GoogleHttpClientSpiceRequest<ExtendHtmlMo
 
             String title = TextUtils.isEmpty(titleSelectAttr) ? blog.select(titleSelectPath).text()
                     : blog.select(titleSelectPath).attr(titleSelectAttr);
-            String summary = TextUtils.isEmpty(summarySelectAttr) ? blog.select(summarySelectPath).text()
-                    : blog.select(summarySelectPath).attr(summarySelectAttr);
+            String summary = TextUtils.isEmpty(summarySelectAttr) ? blog.select(summarySelectPath).get(0).text()
+                    : blog.select(summarySelectPath).get(0).attr(summarySelectAttr);
             String time = TextUtils.isEmpty(timeSelectAttr) ? blog.select(timeSelectPath).text()
                     : blog.select(timeSelectPath).attr(timeSelectAttr);
             String url = TextUtils.isEmpty(urlSelectAttr) ? blog.select(urlSelectPath).text()
