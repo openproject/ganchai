@@ -84,6 +84,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         extendModel.setIntentClass(ExtendWeixinActivity.class);
         extendModels.add(extendModel);
 
+        extendModel = new ExtendModel();
+        extendModel.setTitle("程序人生");
+        extendModel.setDesc("分享CSDN社区中最优质的博文、最精彩的讨论、最实用的开发资源,并不定期奉送CSDN社区的各种福利.");
+        extendModel.setHomepage("http://blog.csdn.net/");
+        extendModel.setHtml("http://weixin.sogou.com/gzhjs?cb=sogou.weixin.gzhcb&openid=oIWsFt4wkuRLzlie2VEGsSMcZtQY&eqs=NVsnoF7g%2Fu01oQgVjZjcHujjW%2BK145LVeLCDCmoMGdexOgdNwyA2GV81AC2cYp9rDpyMx&ekv=3&page=2&t=1441367630660");
+        extendModel.setIntentClass(ExtendWeixinActivity.class);
+        extendModels.add(extendModel);
+
     }
 
     @Override

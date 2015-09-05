@@ -68,6 +68,8 @@ public class ExtendWeixinRequest extends GoogleHttpClientSpiceRequest<ExtendWeix
             Document doc = Jsoup.parse(item);
             extendWeixinModel.setTitle(doc.select("title").text());
             extendWeixinModel.setSummary(doc.select("content").text());
+            extendWeixinModel.setTime(doc.select("date").text());
+            extendWeixinModel.setUrl(doc.select("url").text());
 
             extendCsdnModels.add(extendWeixinModel);
         }

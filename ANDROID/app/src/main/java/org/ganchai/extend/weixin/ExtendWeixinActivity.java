@@ -129,7 +129,7 @@ public class ExtendWeixinActivity extends BaseExtendActivity implements View.OnC
 
                         titleView.setText(Html.fromHtml(extendWeixinModel.getTitle()));
                         descView.setText(Html.fromHtml(extendWeixinModel.getSummary()));
-                        timeView.setText(extendWeixinModel.getTime());
+                        timeView.setText(Html.fromHtml(extendWeixinModel.getTime()));
 
                         // set listener
                         recycleViewHolder.itemView.setTag(extendWeixinModel);
