@@ -79,6 +79,10 @@
             android:name="xyz.ganchai.activity.SearchActivity"
             android:label="@string/title_activity_search" >
         </activity>
+        <activity
+            android:name=".extend.weixin.ExtendWeixinWebviewActivity"
+            android:label="@string/title_activity_extend_weixin_webview" >
+        </activity>
     </application>
 
 </manifest>

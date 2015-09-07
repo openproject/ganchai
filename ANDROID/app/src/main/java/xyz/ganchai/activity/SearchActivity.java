@@ -1,5 +1,6 @@
 package xyz.ganchai.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,16 +22,21 @@ import com.octo.android.robospice.request.listener.RequestListener;
 import org.apache.commons.lang3.text.translate.UnicodeEscaper;
 import org.ganchai.R;
 import org.ganchai.activity.BaseActivity;
+import org.ganchai.activity.WebViewActivity;
+import org.ganchai.extend.BaseExtendActivity;
 import org.ganchai.extend.ExtendModel;
+import org.ganchai.extend.html.ExtendHtmlActivity;
 import org.ganchai.extend.html.ExtendHtmlModel;
 import org.ganchai.extend.html.ExtendHtmlModelList;
 import org.ganchai.extend.html.ExtendHtmlRequest;
+import org.ganchai.extend.weixin.ExtendWeixinActivity;
+import org.ganchai.extend.weixin.ExtendWeixinWebviewActivity;
 import org.ganchai.widget.RecycleItemDecoration;
 
 import java.net.URLEncoder;
 import java.util.List;
 
-public class SearchActivity extends BaseActivity {
+public class SearchActivity extends BaseActivity implements View.OnClickListener {
 
     private List<ExtendModel> extendModels;
 
@@ -80,7 +86,7 @@ public class SearchActivity extends BaseActivity {
         request.setTimeSelectPath(".hui");
         request.setUrlSelectPath(".wx-rb");
         request.setUrlSelectAttr("href");
-        request.setUrlSelectPrefix("http://weixin.sougou.com/");
+        request.setUrlSelectPrefix("http://weixin.sogou.com");
 
         getSpiceManager().execute(request, new RequestListener<ExtendHtmlModelList>() {
             @Override
@@ -114,8 +120,8 @@ public class SearchActivity extends BaseActivity {
                         timeView.setText(extendHtmlModel.getTime());
 
                         // set listener
-//                        recycleViewHolder.itemView.setTag(extendHtmlModel);
-//                        recycleViewHolder.itemView.setOnClickListener(ExtendHtmlActivity.this);
+                        recycleViewHolder.itemView.setTag(extendHtmlModel);
+                        recycleViewHolder.itemView.setOnClickListener(SearchActivity.this);
                     }
                 });
         recyclerView.setAdapter(adapter);
@@ -147,5 +153,23 @@ public class SearchActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Object tag = v.getTag();
+        if (tag != null) {
+
+            ExtendHtmlModel extendHtmlModel = (ExtendHtmlModel) tag;
+
+//            Intent intent = new Intent(SearchActivity.this, ExtendWeixinActivity.class);
+//            intent.putExtra(BaseExtendActivity.KEY_TITLE, extendHtmlModel.getTitle());
+//            intent.putExtra(BaseExtendActivity.KEY_HTML, extendHtmlModel.getUrl());
+
+            Intent intent = new Intent(SearchActivity.this, ExtendWeixinWebviewActivity.class);
+            intent.putExtra(ExtendWeixinWebviewActivity.KEY_URL, extendHtmlModel.getUrl());
+
+            startActivity(intent);
+        }
     }
 }
