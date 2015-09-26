@@ -69,7 +69,7 @@ public class ExtendWeixinRequest extends GoogleHttpClientSpiceRequest<ExtendWeix
             extendWeixinModel.setTitle(doc.select("title").text());
             extendWeixinModel.setSummary(doc.select("content").text());
             extendWeixinModel.setTime(doc.select("date").text());
-            extendWeixinModel.setUrl(doc.select("url").text());
+            extendWeixinModel.setUrl("http://weixin.sogou.com" + doc.select("url").text());
 
             extendCsdnModels.add(extendWeixinModel);
         }

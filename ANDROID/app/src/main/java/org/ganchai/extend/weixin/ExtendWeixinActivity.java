@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.jayfeng.lesscode.core.AdapterLess;
+import com.jayfeng.lesscode.core.LogLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -169,6 +170,7 @@ public class ExtendWeixinActivity extends BaseExtendActivity implements View.OnC
         if (tag != null) {
             Intent intent = new Intent(ExtendWeixinActivity.this, WebViewActivity.class);
             intent.putExtra(WebViewActivity.KEY_URL, ((ExtendWeixinModel) tag).getUrl());
+            LogLess.$d("=========url:" + ((ExtendWeixinModel) tag).getUrl());
             startActivity(intent);
         }
     }

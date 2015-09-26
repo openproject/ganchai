@@ -15,6 +15,7 @@ import com.jayfeng.lesscode.core.ViewLess;
 
 import org.ganchai.R;
 import org.ganchai.activity.BaseActivity;
+import org.ganchai.activity.WebViewActivity;
 import org.ganchai.extend.BaseExtendActivity;
 
 import xyz.ganchai.activity.SearchActivity;
@@ -29,15 +30,15 @@ public class ExtendWeixinWebviewActivity extends BaseActivity {
     private WebViewClient webViewClient = new WebViewClient() {
         @Override
         public WebResourceResponse shouldInterceptRequest(final WebView view, final String url) {
-            if (url.startsWith("http://weixin.sogou.com/gzhjs?cb=sogou.weixin.gzhcb&openid=")) {
+            if (url.startsWith("http://mp.weixin.qq.com/s?__biz")) {
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
 //                        Toast.makeText(ExtendWeixinWebviewActivity.this, url, Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(ExtendWeixinWebviewActivity.this, ExtendWeixinActivity.class);
+                                    Intent intent = new Intent(ExtendWeixinWebviewActivity.this, WebViewActivity.class);
             intent.putExtra(BaseExtendActivity.KEY_TITLE, view.getTitle());
-            intent.putExtra(BaseExtendActivity.KEY_HTML, url);
+            intent.putExtra(WebViewActivity.KEY_URL, url);
                         startActivity(intent);
                     }
                 });
