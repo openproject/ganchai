@@ -97,6 +97,7 @@ public class ExtendListFragment extends BaseFragment implements View.OnClickList
                 intent = new Intent(getActivity(), extendModel.getIntentClass());
                 intent.putExtra(BaseExtendActivity.KEY_TITLE, extendModel.getTitle());
                 intent.putExtra(BaseExtendActivity.KEY_HTML, extendModel.getHtml());
+                intent.putExtra(BaseExtendActivity.KEY_RSS, extendModel.getRss());
 
                 // for html parse
                 intent.putExtra(ExtendHtmlActivity.KEY_SELECT_PATH_LIST, extendModel.getListSelectPath());
